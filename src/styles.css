@@ -39,52 +39,54 @@
 :root {
   --radius: 0.25rem;
 
-  /* Cinematic dark sci-fi palette */
-  --background: oklch(0.12 0.02 250);
-  --foreground: oklch(0.96 0.01 240);
+  /* Arknights: Endfield palette — warm amber + deep teal-black */
+  --background: oklch(0.14 0.012 60);
+  --foreground: oklch(0.94 0.025 75);
 
-  --card: oklch(0.16 0.025 250);
-  --card-foreground: oklch(0.96 0.01 240);
-  --popover: oklch(0.14 0.025 250);
-  --popover-foreground: oklch(0.96 0.01 240);
+  --card: oklch(0.18 0.015 65);
+  --card-foreground: oklch(0.94 0.025 75);
+  --popover: oklch(0.16 0.015 65);
+  --popover-foreground: oklch(0.94 0.025 75);
 
-  /* Electric blue primary */
-  --primary: oklch(0.72 0.18 230);
-  --primary-foreground: oklch(0.08 0.02 250);
+  /* Amber/gold primary */
+  --primary: oklch(0.78 0.14 75);
+  --primary-foreground: oklch(0.12 0.02 60);
 
-  --secondary: oklch(0.22 0.03 255);
-  --secondary-foreground: oklch(0.96 0.01 240);
+  --secondary: oklch(0.24 0.02 70);
+  --secondary-foreground: oklch(0.94 0.025 75);
 
-  --muted: oklch(0.2 0.025 255);
-  --muted-foreground: oklch(0.65 0.02 240);
+  --muted: oklch(0.22 0.018 70);
+  --muted-foreground: oklch(0.7 0.025 75);
 
-  --accent: oklch(0.78 0.16 200);
-  --accent-foreground: oklch(0.08 0.02 250);
+  --accent: oklch(0.7 0.11 195);
+  --accent-foreground: oklch(0.12 0.02 60);
 
-  --destructive: oklch(0.65 0.22 25);
+  --destructive: oklch(0.62 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
 
-  --border: oklch(0.3 0.04 240 / 0.4);
-  --input: oklch(0.25 0.03 245);
-  --ring: oklch(0.72 0.18 230);
+  --border: oklch(0.4 0.04 75 / 0.35);
+  --input: oklch(0.26 0.02 70);
+  --ring: oklch(0.78 0.14 75);
 
-  /* Custom accents */
-  --cyan: oklch(0.85 0.16 195);
-  --teal: oklch(0.78 0.14 180);
-  --purple-glow: oklch(0.65 0.22 295);
+  /* Endfield accents — amber, teal, cream */
+  --cyan: oklch(0.72 0.1 195);
+  --teal: oklch(0.6 0.08 200);
+  --purple-glow: oklch(0.7 0.13 50);
+  --amber: oklch(0.82 0.15 75);
+  --cream: oklch(0.96 0.04 85);
 
   /* Gradients */
-  --gradient-mesh: radial-gradient(at 20% 20%, oklch(0.3 0.15 230 / 0.5) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, oklch(0.35 0.18 295 / 0.4) 0px, transparent 50%),
-    radial-gradient(at 0% 80%, oklch(0.32 0.15 200 / 0.4) 0px, transparent 50%),
-    radial-gradient(at 80% 80%, oklch(0.28 0.14 250 / 0.45) 0px, transparent 50%);
-  --gradient-hero: linear-gradient(135deg, oklch(0.72 0.18 230), oklch(0.78 0.16 200), oklch(0.65 0.22 295));
+  --gradient-mesh: radial-gradient(at 20% 20%, oklch(0.32 0.12 75 / 0.55) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, oklch(0.28 0.08 200 / 0.4) 0px, transparent 50%),
+    radial-gradient(at 0% 80%, oklch(0.3 0.1 50 / 0.4) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, oklch(0.25 0.06 80 / 0.5) 0px, transparent 50%);
+  --gradient-hero: linear-gradient(135deg, oklch(0.82 0.15 75), oklch(0.78 0.14 60), oklch(0.72 0.1 195));
   --gradient-panel: linear-gradient(135deg, oklch(1 0 0 / 0.05), oklch(1 0 0 / 0.01));
 
-  /* Shadows / glows */
-  --glow-primary: 0 0 40px oklch(0.72 0.18 230 / 0.5), 0 0 80px oklch(0.72 0.18 230 / 0.25);
-  --glow-cyan: 0 0 30px oklch(0.85 0.16 195 / 0.45);
-  --glow-purple: 0 0 60px oklch(0.65 0.22 295 / 0.35);
+  /* Glows */
+  --glow-primary: 0 0 40px oklch(0.78 0.14 75 / 0.5), 0 0 80px oklch(0.78 0.14 75 / 0.25);
+  --glow-cyan: 0 0 30px oklch(0.72 0.1 195 / 0.45);
+  --glow-purple: 0 0 60px oklch(0.7 0.13 50 / 0.35);
 
   --transition-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
 }
