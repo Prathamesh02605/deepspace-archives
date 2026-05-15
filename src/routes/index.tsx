@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { CursorGlow } from "@/components/CursorGlow";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
@@ -32,6 +33,7 @@ function Index() {
       <LoadingScreen onDone={() => setLoaded(true)} />
       <CursorGlow />
       <AmbientBackground />
+      {loaded && <SmoothScroll />}
 
       {loaded && (
         <motion.main
