@@ -14,16 +14,16 @@ function FloatingCore() {
     <Float speed={1.2} rotationIntensity={0.6} floatIntensity={1.4}>
       <Icosahedron ref={ref} args={[1.4, 1]}>
         <meshStandardMaterial
-          color="#7dd3fc"
-          emissive="#0891b2"
-          emissiveIntensity={0.6}
+          color="#e8c07a"
+          emissive="#a87a2c"
+          emissiveIntensity={0.55}
           wireframe
           transparent
-          opacity={0.55}
+          opacity={0.6}
         />
       </Icosahedron>
       <Icosahedron args={[1.42, 0]}>
-        <meshBasicMaterial color="#a78bfa" wireframe transparent opacity={0.18} />
+        <meshBasicMaterial color="#7fb8b4" wireframe transparent opacity={0.18} />
       </Icosahedron>
     </Float>
   );
@@ -39,13 +39,13 @@ function OrbitRings() {
   return (
     <group ref={g}>
       <Torus args={[2.4, 0.005, 16, 100]}>
-        <meshBasicMaterial color="#67e8f9" transparent opacity={0.5} />
+        <meshBasicMaterial color="#e8c07a" transparent opacity={0.55} />
       </Torus>
       <Torus args={[2.8, 0.003, 16, 100]} rotation={[Math.PI / 2.5, 0, 0]}>
-        <meshBasicMaterial color="#818cf8" transparent opacity={0.35} />
+        <meshBasicMaterial color="#c9a84c" transparent opacity={0.4} />
       </Torus>
       <Torus args={[3.3, 0.002, 16, 100]} rotation={[0, Math.PI / 3, 0]}>
-        <meshBasicMaterial color="#a78bfa" transparent opacity={0.25} />
+        <meshBasicMaterial color="#7fb8b4" transparent opacity={0.28} />
       </Torus>
     </group>
   );
@@ -82,9 +82,9 @@ export function Scene3D() {
       camera={{ position: [0, 0, 6], fov: 55 }}
     >
       <ambientLight intensity={0.35} />
-      <pointLight position={[5, 5, 5]} intensity={1.2} color="#7dd3fc" />
-      <pointLight position={[-5, -3, -5]} intensity={0.8} color="#a78bfa" />
-      <Stars radius={60} depth={40} count={1800} factor={3} saturation={0.5} fade speed={0.8} />
+      <pointLight position={[5, 5, 5]} intensity={1.2} color="#e8c07a" />
+      <pointLight position={[-5, -3, -5]} intensity={0.8} color="#7fb8b4" />
+      <Stars radius={60} depth={40} count={1800} factor={3} saturation={0.4} fade speed={0.8} />
       <FloatingCore />
       <OrbitRings />
       <ParallaxRig />
