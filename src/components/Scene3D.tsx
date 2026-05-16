@@ -81,10 +81,10 @@ export function Scene3D() {
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       camera={{ position: [0, 0, 6], fov: 55 }}
     >
-      <ambientLight intensity={0.35} />
-      <pointLight position={[5, 5, 5]} intensity={1.2} color="#e8c07a" />
-      <pointLight position={[-5, -3, -5]} intensity={0.8} color="#7fb8b4" />
-      <Stars radius={60} depth={40} count={1800} factor={3} saturation={0.4} fade speed={0.8} />
+      <ambientLight intensity={0.7} />
+      <pointLight position={[5, 5, 5]} intensity={1.4} color="#facc15" />
+      <pointLight position={[-5, -3, -5]} intensity={0.9} color="#fde047" />
+      <Stars radius={60} depth={40} count={1200} factor={2.5} saturation={0.8} fade speed={0.8} />
       <FloatingCore />
       <OrbitRings />
       <ParallaxRig />
