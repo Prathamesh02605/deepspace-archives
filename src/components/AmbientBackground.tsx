@@ -39,9 +39,9 @@ export function AmbientBackground() {
         if (p.y > h) p.y = 0;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(232, 192, 122, ${p.a})`;
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = "rgba(232, 192, 122, 0.8)";
+        ctx.fillStyle = `rgba(245, 200, 40, ${p.a})`;
+        ctx.shadowBlur = 14;
+        ctx.shadowColor = "rgba(250, 210, 50, 0.9)";
         ctx.fill();
       }
       raf = requestAnimationFrame(tick);
