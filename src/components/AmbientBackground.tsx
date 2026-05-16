@@ -68,7 +68,7 @@ export function AmbientBackground() {
       {/* Scan line */}
       <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--cyan)]/60 to-transparent animate-scan" />
       {/* Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,oklch(0.1_0.012_60)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,oklch(0.985_0.005_90)_100%)]" />
       {/* Noise */}
       <div className="absolute inset-0 noise-overlay" />
     </div>
