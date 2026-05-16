@@ -14,16 +14,16 @@ function FloatingCore() {
     <Float speed={1.2} rotationIntensity={0.6} floatIntensity={1.4}>
       <Icosahedron ref={ref} args={[1.4, 1]}>
         <meshStandardMaterial
-          color="#e8c07a"
-          emissive="#a87a2c"
-          emissiveIntensity={0.55}
+          color="#f5c518"
+          emissive="#facc15"
+          emissiveIntensity={0.7}
           wireframe
           transparent
-          opacity={0.6}
+          opacity={0.75}
         />
       </Icosahedron>
       <Icosahedron args={[1.42, 0]}>
-        <meshBasicMaterial color="#7fb8b4" wireframe transparent opacity={0.18} />
+        <meshBasicMaterial color="#eab308" wireframe transparent opacity={0.25} />
       </Icosahedron>
     </Float>
   );
