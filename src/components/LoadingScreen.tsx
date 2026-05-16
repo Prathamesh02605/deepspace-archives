@@ -3,94 +3,122 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export function LoadingScreen({ onDone }: { onDone: () => void }) {
   const [progress, setProgress] = useState(0);
-  const [done, setDone] = useState(false);
+  const [phase, setPhase] = useState<"loading" | "transition" | "done">("loading");
 
   useEffect(() => {
     let p = 0;
     const id = setInterval(() => {
-      p += Math.random() * 8 + 3;
+      p += Math.random() * 7 + 2;
       if (p >= 100) {
         p = 100;
         clearInterval(id);
-        setTimeout(() => setDone(true), 500);
-        setTimeout(onDone, 1300);
+        setProgress(100);
+        // brief hold at 100%, then horizontal sweep transition, then fade
+        setTimeout(() => setPhase("transition"), 350);
+        setTimeout(() => setPhase("done"), 1400);
+        setTimeout(onDone, 2000);
+        return;
       }
       setProgress(Math.floor(p));
-    }, 90);
+    }, 80);
     return () => clearInterval(id);
   }, [onDone]);
 
   return (
     <AnimatePresence>
-      {!done && (
+      {phase !== "done" && (
         <motion.div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-background overflow-hidden"
-          exit={{ opacity: 0, filter: "blur(20px)", scale: 1.05 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-[200] overflow-hidden bg-[#0a0a0a]"
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="absolute inset-0 grid-bg opacity-30" />
-          <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--cyan)] to-transparent animate-scan" />
+          {/* Subtle grid */}
+          <div className="absolute inset-0 opacity-[0.06]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+              backgroundSize: "60px 60px",
+            }}
+          />
 
-          {/* HUD corners */}
-          <div className="absolute top-6 left-6 font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--cyan)]/70">
-            SYS://INIT_SEQUENCE
-          </div>
-          <div className="absolute top-6 right-6 font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--cyan)]/70">
+          {/* HUD */}
+          <div className="absolute top-6 right-8 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
             v.0.1.0 — PK_OS
           </div>
-          <div className="absolute bottom-6 left-6 font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--cyan)]/70">
-            LOADING ASSETS
-          </div>
-          <div className="absolute bottom-6 right-6 font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--cyan)]/70">
+          <div className="absolute bottom-6 right-8 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
             STATUS: NOMINAL
           </div>
 
-          <div className="relative flex flex-col items-center gap-10">
-            {/* Rings */}
-            <div className="relative h-48 w-48">
-              <div className="absolute inset-0 rounded-full border border-[var(--primary)]/30 animate-spin-slow" />
-              <div className="absolute inset-3 rounded-full border border-dashed border-[var(--cyan)]/40 animate-spin-reverse" />
-              <div className="absolute inset-6 rounded-full border border-[var(--purple-glow)]/20" />
-              <svg className="absolute inset-0 -rotate-90" viewBox="0 0 100 100">
-                <circle
-                  cx="50" cy="50" r="46"
-                  fill="none"
-                  stroke="oklch(0.72 0.18 230)"
-                  strokeWidth="1"
-                  strokeDasharray={`${(progress / 100) * 289} 289`}
-                  className="transition-all duration-200"
-                  style={{ filter: "drop-shadow(0 0 6px oklch(0.72 0.18 230))" }}
-                />
-              </svg>
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8 }}
-                  className="text-5xl font-display font-light tracking-[0.15em] text-gradient"
-                >
-                  PK
-                </motion.div>
-                <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                  Initializing
-                </div>
-              </div>
-            </div>
+          {/* White PK logo top-left */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: phase === "transition" ? 0 : 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-8 left-8 flex items-center gap-3"
+          >
+            <span className="font-display text-3xl font-light tracking-[0.2em] text-white">PK</span>
+            <span className="h-3 w-px bg-white/30" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/50">
+              KHACHANE
+            </span>
+          </motion.div>
 
-            {/* Progress */}
-            <div className="w-72 space-y-2">
-              <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-                <span>LOADING</span>
-                <span className="text-[var(--cyan)]">{progress.toString().padStart(3, "0")}%</span>
-              </div>
-              <div className="h-px bg-border overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-[var(--cyan)] via-[var(--primary)] to-[var(--purple-glow)] transition-all duration-200"
-                  style={{ width: `${progress}%`, boxShadow: "0 0 10px oklch(0.72 0.18 230)" }}
+          {/* Vertical loading bar — top-left to bottom-left */}
+          {phase === "loading" && (
+            <>
+              {/* Track */}
+              <div className="absolute left-8 top-28 bottom-20 w-[3px] bg-white/10 overflow-hidden">
+                {/* Fill grows downward */}
+                <motion.div
+                  className="absolute top-0 left-0 w-full bg-[#facc15]"
+                  style={{
+                    height: `${progress}%`,
+                    boxShadow: "0 0 16px #facc15, 0 0 32px rgba(250,204,21,0.5)",
+                  }}
+                  transition={{ ease: "linear" }}
                 />
               </div>
-            </div>
-          </div>
+
+              {/* Percentage alongside the bar — follows the fill */}
+              <motion.div
+                className="absolute left-14 font-mono text-xs tracking-[0.2em] text-[#facc15]"
+                style={{
+                  top: `calc(7rem + (100% - 7rem - 5rem - 1rem) * ${progress / 100})`,
+                  textShadow: "0 0 12px rgba(250,204,21,0.6)",
+                }}
+              >
+                {progress.toString().padStart(3, "0")}%
+              </motion.div>
+
+              {/* Loading label bottom-left */}
+              <div className="absolute bottom-6 left-8 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+                LOADING ASSETS
+              </div>
+            </>
+          )}
+
+          {/* Transition sweep — bar widens horizontally left→right then fades */}
+          {phase === "transition" && (
+            <motion.div
+              initial={{ width: "3px", left: "2rem", top: "7rem", bottom: "5rem", opacity: 1 }}
+              animate={{
+                width: "100vw",
+                left: 0,
+                top: 0,
+                bottom: 0,
+                opacity: [1, 1, 0],
+              }}
+              transition={{
+                duration: 1.1,
+                ease: [0.7, 0, 0.3, 1],
+                times: [0, 0.7, 1],
+              }}
+              className="absolute bg-[#facc15]"
+              style={{
+                boxShadow: "0 0 60px #facc15, 0 0 120px rgba(250,204,21,0.6)",
+              }}
+            />
+          )}
         </motion.div>
       )}
     </AnimatePresence>
