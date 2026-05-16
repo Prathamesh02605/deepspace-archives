@@ -83,7 +83,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
               <motion.div
                 className="absolute left-14 font-mono text-xs tracking-[0.2em] text-[#facc15]"
                 style={{
-                  top: `calc(7rem + (100% - 7rem - 5rem - 1rem) * ${progress / 100})`,
+                  top: `calc(7rem + (100vh - 13rem) * ${progress / 100})`,
                   textShadow: "0 0 12px rgba(250,204,21,0.6)",
                 }}
               >
