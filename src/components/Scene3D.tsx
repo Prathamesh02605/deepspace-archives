@@ -39,13 +39,13 @@ function OrbitRings() {
   return (
     <group ref={g}>
       <Torus args={[2.4, 0.005, 16, 100]}>
-        <meshBasicMaterial color="#e8c07a" transparent opacity={0.55} />
+        <meshBasicMaterial color="#f5c518" transparent opacity={0.7} />
       </Torus>
       <Torus args={[2.8, 0.003, 16, 100]} rotation={[Math.PI / 2.5, 0, 0]}>
-        <meshBasicMaterial color="#c9a84c" transparent opacity={0.4} />
+        <meshBasicMaterial color="#eab308" transparent opacity={0.55} />
       </Torus>
       <Torus args={[3.3, 0.002, 16, 100]} rotation={[0, Math.PI / 3, 0]}>
-        <meshBasicMaterial color="#7fb8b4" transparent opacity={0.28} />
+        <meshBasicMaterial color="#fde047" transparent opacity={0.4} />
       </Torus>
     </group>
   );
