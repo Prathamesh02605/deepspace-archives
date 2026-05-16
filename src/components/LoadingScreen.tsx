@@ -8,15 +8,14 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
   useEffect(() => {
     let p = 0;
     const id = setInterval(() => {
-      p += Math.random() * 7 + 2;
+      p += Math.random() * 6 + 2;
       if (p >= 100) {
         p = 100;
         clearInterval(id);
         setProgress(100);
-        // brief hold at 100%, then horizontal sweep transition, then fade
-        setTimeout(() => setPhase("transition"), 350);
-        setTimeout(() => setPhase("done"), 1400);
-        setTimeout(onDone, 2000);
+        setTimeout(() => setPhase("transition"), 450);
+        setTimeout(() => setPhase("done"), 1500);
+        setTimeout(onDone, 2100);
         return;
       }
       setProgress(Math.floor(p));
@@ -30,31 +29,24 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
         <motion.div
           className="fixed inset-0 z-[200] overflow-hidden bg-[#0a0a0a]"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.4 }}
         >
-          {/* Subtle grid */}
-          <div className="absolute inset-0 opacity-[0.06]"
+          {/* Faint topographic grid */}
+          <div
+            className="absolute inset-0 opacity-[0.05]"
             style={{
               backgroundImage:
                 "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
-              backgroundSize: "60px 60px",
+              backgroundSize: "120px 120px",
             }}
           />
 
-          {/* HUD */}
-          <div className="absolute top-6 right-8 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
-            v.0.1.0 — PK_OS
-          </div>
-          <div className="absolute bottom-6 right-8 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
-            STATUS: NOMINAL
-          </div>
-
           {/* White PK logo top-left */}
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: phase === "transition" ? 0 : 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-8 left-8 flex items-center gap-3"
+            transition={{ duration: 0.6 }}
+            className="absolute top-8 left-10 flex items-center gap-3"
           >
             <span className="font-display text-3xl font-light tracking-[0.2em] text-white">PK</span>
             <span className="h-3 w-px bg-white/30" />
@@ -63,59 +55,62 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
             </span>
           </motion.div>
 
-          {/* Vertical loading bar — top-left to bottom-left */}
+          {/* HUD corners */}
+          <div className="absolute top-8 right-10 font-mono text-[10px] uppercase tracking-[0.3em] text-white/35">
+            v.0.1.0 — PK_OS
+          </div>
+
+          {/* Bottom-left: tiny vertical tick + big % number */}
           {phase === "loading" && (
-            <>
-              {/* Track */}
-              <div className="absolute left-8 top-28 bottom-20 w-[3px] bg-white/10 overflow-hidden">
-                {/* Fill grows downward */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="absolute bottom-10 left-10 flex flex-col items-start gap-3"
+            >
+              {/* Vertical tick that fills upward */}
+              <div className="relative h-16 w-[3px] bg-white/10">
                 <motion.div
-                  className="absolute top-0 left-0 w-full bg-[#facc15]"
+                  className="absolute bottom-0 left-0 w-full bg-[#facc15]"
                   style={{
                     height: `${progress}%`,
-                    boxShadow: "0 0 16px #facc15, 0 0 32px rgba(250,204,21,0.5)",
+                    boxShadow: "0 0 14px #facc15, 0 0 28px rgba(250,204,21,0.5)",
                   }}
-                  transition={{ ease: "linear" }}
                 />
               </div>
 
-              {/* Percentage alongside the bar — follows the fill */}
-              <motion.div
-                className="absolute left-14 font-mono text-xs tracking-[0.2em] text-[#facc15]"
-                style={{
-                  top: `calc(7rem + (100vh - 13rem) * ${progress / 100})`,
-                  textShadow: "0 0 12px rgba(250,204,21,0.6)",
-                }}
-              >
-                {progress.toString().padStart(3, "0")}%
-              </motion.div>
-
-              {/* Loading label bottom-left */}
-              <div className="absolute bottom-6 left-8 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
-                LOADING ASSETS
+              {/* Big percentage */}
+              <div className="flex items-baseline gap-1 leading-none">
+                <span
+                  className="font-display text-6xl font-light tracking-tight text-[#facc15] tabular-nums"
+                  style={{ textShadow: "0 0 24px rgba(250,204,21,0.45)" }}
+                >
+                  {progress.toString().padStart(2, "0")}
+                </span>
+                <span className="font-display text-2xl font-light text-[#facc15]">%</span>
               </div>
-            </>
+
+              {/* Tiny status */}
+              <div className="mt-1 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-white/35">
+                <span className="h-1 w-1 bg-[#facc15] animate-pulse" />
+                <span>Loading assets</span>
+              </div>
+            </motion.div>
           )}
 
-          {/* Transition sweep — bar widens horizontally left→right then fades */}
+          {/* Transition: yellow bar sweeps from left to right across the screen, then fades */}
           {phase === "transition" && (
             <motion.div
-              initial={{ width: "3px", left: "2rem", top: "7rem", bottom: "5rem", opacity: 1 }}
-              animate={{
-                width: "100vw",
-                left: 0,
-                top: 0,
-                bottom: 0,
-                opacity: [1, 1, 0],
-              }}
+              initial={{ width: "3px", x: 0, opacity: 1 }}
+              animate={{ width: "100vw", opacity: [1, 1, 0] }}
               transition={{
                 duration: 1.1,
                 ease: [0.7, 0, 0.3, 1],
-                times: [0, 0.7, 1],
+                times: [0, 0.65, 1],
               }}
-              className="absolute bg-[#facc15]"
+              className="absolute top-0 left-0 h-full bg-[#facc15]"
               style={{
-                boxShadow: "0 0 60px #facc15, 0 0 120px rgba(250,204,21,0.6)",
+                boxShadow: "0 0 60px #facc15, 0 0 140px rgba(250,204,21,0.6)",
               }}
             />
           )}
