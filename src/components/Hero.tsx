@@ -44,47 +44,74 @@ export function Hero() {
         className="absolute bottom-[10%] left-[5%] h-96 w-96 rounded-full bg-[var(--purple-glow)]/15 blur-3xl"
       />
 
+      {/* Repeating outlined text backdrop — sportsbrut/St-Louis-City style */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 flex flex-col justify-center gap-1 overflow-hidden opacity-[0.07] select-none"
+        style={{
+          WebkitTextStroke: "1px currentColor",
+          color: "var(--foreground)",
+        }}
+      >
+        {Array.from({ length: 7 }).map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ x: i % 2 === 0 ? "-3%" : "3%" }}
+            animate={{ x: i % 2 === 0 ? ["-3%", "0%", "-3%"] : ["3%", "0%", "3%"] }}
+            transition={{ duration: 14 + i, repeat: Infinity, ease: "easeInOut" }}
+            className="font-display font-black uppercase tracking-tighter text-[9rem] leading-[0.85] whitespace-nowrap text-transparent"
+          >
+            KHACHANE&nbsp;KHACHANE&nbsp;KHACHANE&nbsp;KHACHANE
+          </motion.div>
+        ))}
+      </div>
+
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12 w-full pt-32 pb-20 z-10">
-        {/* Top label */}
+        {/* Top label — yellow chip + bracketed status */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="mb-8 flex items-center gap-3 font-label text-[10px] uppercase text-[var(--cyan)]"
+          className="mb-8 flex flex-wrap items-center gap-3"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--cyan)] animate-pulse" />
-          <span>PORTFOLIO // 2026</span>
-          <span className="h-px w-12 bg-[var(--cyan)]/50" />
-          <span className="text-muted-foreground font-mono tracking-[0.3em]">OPERATOR ONLINE</span>
+          <span className="inline-flex items-center gap-2 bg-[#facc15] text-black font-mono text-[10px] uppercase tracking-[0.3em] px-3 py-1">
+            <span className="h-1.5 w-1.5 bg-black animate-pulse" />
+            PORTFOLIO / 2026
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/50">
+            [ OPERATOR_ONLINE ]
+          </span>
+          <span className="h-px w-12 bg-foreground/40" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/40">
+            LAT 19.07° / LON 72.87°
+          </span>
         </motion.div>
 
-        {/* Headline — staggered */}
-        <h1 className="font-display font-extralight leading-[0.88] tracking-[-0.02em]">
-          {"PRATHAMESH".split("").map((c, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 80, filter: "blur(24px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ delay: 0.4 + i * 0.04, duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-block text-6xl sm:text-7xl md:text-8xl lg:text-[9.5rem]"
+        {/* Headline — bold black sportsbrut with glitch */}
+        <h1 className="font-display font-black leading-[0.85] tracking-[-0.03em] uppercase">
+          <motion.span
+            initial={{ opacity: 0, y: 40, filter: "blur(20px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            data-text="PRATHAMESH"
+            className="glitch block text-6xl sm:text-7xl md:text-8xl lg:text-[9.5rem] text-foreground"
+          >
+            PRATHAMESH
+          </motion.span>
+          <motion.span
+            initial={{ clipPath: "inset(0 100% 0 0)" }}
+            animate={{ clipPath: "inset(0 0 0 0)" }}
+            transition={{ delay: 0.8, duration: 0.9, ease: [0.7, 0, 0.25, 1] }}
+            className="block"
+          >
+            <span
+              data-text="KHACHANE"
+              className="glitch text-6xl sm:text-7xl md:text-8xl lg:text-[9.5rem] text-[#facc15]"
+              style={{ textShadow: "4px 4px 0 rgba(0,0,0,0.85)" }}
             >
-              {c}
-            </motion.span>
-          ))}
-          <br />
-          <span className="text-gradient">
-            {"KHACHANE".split("").map((c, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 80, filter: "blur(24px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{ delay: 0.85 + i * 0.04, duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
-                className="inline-block text-6xl sm:text-7xl md:text-8xl lg:text-[9.5rem]"
-              >
-                {c}
-              </motion.span>
-            ))}
-          </span>
+              KHACHANE
+            </span>
+          </motion.span>
         </h1>
 
         <motion.div
