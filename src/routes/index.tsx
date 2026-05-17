@@ -34,6 +34,7 @@ function Index() {
       <LoadingScreen onDone={() => setLoaded(true)} />
       <CursorGlow />
       <AmbientBackground />
+      {loaded && <HolographicOverlay />}
       {loaded && <SmoothScroll />}
 
       {loaded && (
