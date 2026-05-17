@@ -39,9 +39,9 @@
 :root {
   --radius: 0.25rem;
 
-  /* Light canvas + bold yellow accent */
-  --background: oklch(0.985 0.005 90);
-  --foreground: oklch(0.16 0.015 80);
+  /* Softer warm off-white canvas (easier on the eyes than #fff) */
+  --background: oklch(0.96 0.012 88);
+  --foreground: oklch(0.18 0.015 80);
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.16 0.015 80);
@@ -247,4 +247,86 @@
   }
   .animate-spin-slow { animation: spin-slow 20s linear infinite; }
   .animate-spin-reverse { animation: spin-slow 14s linear infinite reverse; }
+
+  /* ───────── Sportsbrut / Swiss-International utilities ───────── */
+
+  /* Sharp square corners override */
+  .sb-square, .sb-square * { border-radius: 0 !important; }
+
+  /* Holographic scanlines overlay */
+  .holo-scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(20, 20, 20, 0.06) 0px,
+      rgba(20, 20, 20, 0.06) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  /* Holographic gradient sweep */
+  @keyframes holo-sweep {
+    0% { background-position: -150% 0; }
+    100% { background-position: 250% 0; }
+  }
+  .holo-sweep {
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      rgba(250, 204, 21, 0.25) 45%,
+      rgba(0, 200, 255, 0.18) 55%,
+      transparent 70%
+    );
+    background-size: 250% 100%;
+    animation: holo-sweep 6s linear infinite;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  /* RGB glitch text */
+  @keyframes glitch-x {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-2px, 1px); }
+    40% { transform: translate(2px, -1px); }
+    60% { transform: translate(-1px, 0); }
+    80% { transform: translate(1px, 1px); }
+  }
+  .glitch {
+    position: relative;
+    display: inline-block;
+  }
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .glitch::before {
+    color: #facc15;
+    mix-blend-mode: multiply;
+    animation: glitch-x 3.2s steps(2, end) infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  }
+  .glitch::after {
+    color: #00b8d4;
+    mix-blend-mode: multiply;
+    animation: glitch-x 2.6s steps(2, end) infinite reverse;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  }
+
+  /* Hard-cut reveal (Swiss/sportsbrut feel) */
+  @keyframes hard-reveal {
+    0% { clip-path: inset(0 100% 0 0); }
+    100% { clip-path: inset(0 0 0 0); }
+  }
+  .animate-hard-reveal { animation: hard-reveal 0.8s steps(8, end) both; }
+
+  /* Modular grid background */
+  .sb-grid {
+    background-image:
+      linear-gradient(rgba(20,20,20,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20,20,20,0.08) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
 }

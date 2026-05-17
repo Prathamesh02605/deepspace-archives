@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { AmbientBackground } from "@/components/AmbientBackground";
+import { HolographicOverlay } from "@/components/HolographicOverlay";
 import { CursorGlow } from "@/components/CursorGlow";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Nav } from "@/components/Nav";
@@ -33,6 +34,7 @@ function Index() {
       <LoadingScreen onDone={() => setLoaded(true)} />
       <CursorGlow />
       <AmbientBackground />
+      {loaded && <HolographicOverlay />}
       {loaded && <SmoothScroll />}
 
       {loaded && (
