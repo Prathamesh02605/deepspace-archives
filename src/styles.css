@@ -39,9 +39,9 @@
 :root {
   --radius: 0.25rem;
 
-  /* Light canvas + bold yellow accent */
-  --background: oklch(0.985 0.005 90);
-  --foreground: oklch(0.16 0.015 80);
+  /* Softer warm off-white canvas (easier on the eyes than #fff) */
+  --background: oklch(0.96 0.012 88);
+  --foreground: oklch(0.18 0.015 80);
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.16 0.015 80);
