@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { ArrowDown, ArrowRight, Mail } from "lucide-react";
 import { Scene3D } from "./Scene3D";
 import { MagneticButton } from "./MagneticButton";
+import { HeroHUD } from "./HeroHUD";
 
 export function Hero() {
   const mx = useMotionValue(0);
@@ -26,6 +27,7 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
+      <HeroHUD />
       {/* WebGL scene right side */}
       <div className="absolute inset-y-0 right-0 w-full lg:w-[60%] pointer-events-none">
         <div className="relative h-full w-full">

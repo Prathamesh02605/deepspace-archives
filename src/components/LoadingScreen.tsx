@@ -46,7 +46,53 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
             }}
           />
 
-          {/* Subtle grid behind logo */}
+          {/* Roving horizontal scan band */}
+          {phase === "loading" && (
+            <motion.div
+              className="absolute left-0 right-0 h-[120px] pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(180deg, transparent, rgba(250,204,21,0.12) 50%, transparent)",
+              }}
+              animate={{ top: ["-15%", "110%"] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
+            />
+          )}
+
+          {/* Scrolling data stream — bottom */}
+          {phase === "loading" && (
+            <div className="absolute bottom-6 left-[10vw] right-[10vw] overflow-hidden font-mono text-[9px] uppercase tracking-[0.35em] text-white/30 pointer-events-none">
+              <motion.div
+                className="whitespace-nowrap"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+              >
+                ► BOOT.SEQ INIT ► LOAD SHADERS ► COMPILE WEBGL ► WARM CACHE ►
+                MOUNT FONTS ► HYDRATE STATE ► AUDIO IDLE ► UPLINK 24ms ► OK ►
+                BOOT.SEQ INIT ► LOAD SHADERS ► COMPILE WEBGL ► WARM CACHE ►
+                MOUNT FONTS ► HYDRATE STATE ► AUDIO IDLE ► UPLINK 24ms ► OK ►
+              </motion.div>
+            </div>
+          )}
+
+          {/* Top right target reticle */}
+          {phase === "loading" && (
+            <div className="absolute top-8 right-8 w-14 h-14 opacity-70 pointer-events-none">
+              <motion.div
+                className="absolute inset-0 border border-[#facc15]/70"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+              />
+              <div className="absolute inset-2 border border-white/30 rounded-full" />
+              <div className="absolute left-1/2 top-0 h-full w-px bg-[#facc15]/50 -translate-x-1/2" />
+              <div className="absolute top-1/2 left-0 w-full h-px bg-[#facc15]/50 -translate-y-1/2" />
+              <motion.div
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-1 w-1 bg-[#facc15]"
+                animate={{ scale: [1, 2.2, 1], opacity: [1, 0.3, 1] }}
+                transition={{ duration: 1.4, repeat: Infinity }}
+              />
+            </div>
+          )}
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.05]"
             style={{
