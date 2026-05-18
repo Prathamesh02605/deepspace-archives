@@ -102,15 +102,34 @@ export function Hero() {
             initial={{ clipPath: "inset(0 100% 0 0)" }}
             animate={{ clipPath: "inset(0 0 0 0)" }}
             transition={{ delay: 0.8, duration: 0.9, ease: [0.7, 0, 0.25, 1] }}
-            className="block"
+            className="block relative"
           >
+            {/* Outlined ghost behind */}
             <span
-              data-text="KHACHANE"
-              className="glitch text-6xl sm:text-7xl md:text-8xl lg:text-[9.5rem] text-[#facc15]"
-              style={{ textShadow: "4px 4px 0 rgba(0,0,0,0.85)" }}
+              aria-hidden
+              className="absolute inset-0 text-6xl sm:text-7xl md:text-8xl lg:text-[9.5rem] select-none pointer-events-none"
+              style={{
+                WebkitTextStroke: "1.5px #facc15",
+                color: "transparent",
+                transform: "translate(8px, 8px)",
+              }}
             >
               KHACHANE
             </span>
+            <span
+              data-text="KHACHANE"
+              className="glitch relative text-6xl sm:text-7xl md:text-8xl lg:text-[9.5rem] text-foreground"
+            >
+              KHACHANE
+            </span>
+            {/* Yellow underline accent */}
+            <motion.span
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 1.6, duration: 0.8, ease: [0.7, 0, 0.25, 1] }}
+              className="absolute -bottom-2 left-0 h-2 w-full bg-[#facc15] origin-left"
+              style={{ boxShadow: "0 0 24px rgba(250,204,21,0.5)" }}
+            />
           </motion.span>
         </h1>
 
