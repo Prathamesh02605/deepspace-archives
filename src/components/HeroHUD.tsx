@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+
 
 /**
  * Hero-section-scoped holographic HUD. Animated, meaningful overlays:
@@ -103,9 +105,134 @@ export function HeroHUD() {
 
       {/* Frame number ticker — top right of hero */}
       <FrameTicker />
+
+      {/* Interactive target reticle — lock-on with ripple */}
+      <InteractiveReticle />
     </div>
   );
 }
+
+function InteractiveReticle() {
+  const [hover, setHover] = useState(false);
+  const [ripples, setRipples] = useState<number[]>([]);
+
+  const onClick = () => {
+    const id = Date.now();
+    setRipples((r) => [...r, id]);
+    setTimeout(() => setRipples((r) => r.filter((x) => x !== id)), 900);
+  };
+
+  return (
+    <div className="absolute bottom-32 left-1/2 -translate-x-1/2 pointer-events-auto">
+      <motion.button
+        type="button"
+        onHoverStart={() => setHover(true)}
+        onHoverEnd={() => setHover(false)}
+        onClick={onClick}
+        whileTap={{ scale: 0.92 }}
+        className="relative w-20 h-20 cursor-crosshair focus:outline-none"
+        aria-label="Target lock"
+      >
+        {/* Outer rotating ring */}
+        <motion.div
+          className="absolute inset-0 border border-[#facc15]/60"
+          animate={{ rotate: hover ? 360 : 0 }}
+          transition={{
+            duration: hover ? 4 : 12,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        {/* Inner ring — pulses on hover */}
+        <motion.div
+          className="absolute inset-2 border border-foreground/40 rounded-full"
+          animate={
+            hover
+              ? { scale: [1, 1.12, 1], opacity: [0.6, 1, 0.6] }
+              : { scale: 1, opacity: 0.4 }
+          }
+          transition={{ duration: 1.2, repeat: hover ? Infinity : 0 }}
+        />
+        {/* Crosshair */}
+        <div className="absolute left-1/2 top-0 h-full w-px bg-[#facc15]/50 -translate-x-1/2" />
+        <div className="absolute top-1/2 left-0 w-full h-px bg-[#facc15]/50 -translate-y-1/2" />
+        {/* Center dot */}
+        <motion.div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-1.5 w-1.5 bg-[#facc15]"
+          animate={
+            hover
+              ? { scale: [1, 1.8, 1] }
+              : { scale: [1, 1.4, 1] }
+          }
+          transition={{ duration: hover ? 0.7 : 1.6, repeat: Infinity }}
+        />
+        {/* Corner brackets — push out on hover */}
+        {[
+          { c: "top-0 left-0", t: -4, l: -4 },
+          { c: "top-0 right-0", t: -4, l: 4 },
+          { c: "bottom-0 left-0", t: 4, l: -4 },
+          { c: "bottom-0 right-0", t: 4, l: 4 },
+        ].map((b, i) => (
+          <motion.div
+            key={i}
+            className={`absolute ${b.c} w-2.5 h-2.5 border-[#facc15]`}
+            style={{
+              borderTopWidth: b.t < 0 ? 1 : 0,
+              borderBottomWidth: b.t > 0 ? 1 : 0,
+              borderLeftWidth: b.l < 0 ? 1 : 0,
+              borderRightWidth: b.l > 0 ? 1 : 0,
+            }}
+            animate={{ x: hover ? b.l : 0, y: hover ? b.t : 0 }}
+            transition={{ type: "spring", stiffness: 240, damping: 18 }}
+          />
+        ))}
+
+        {/* Ripples */}
+        <AnimatePresence>
+          {ripples.map((id) => (
+            <motion.span
+              key={id}
+              className="absolute inset-0 border border-[#facc15] rounded-full pointer-events-none"
+              initial={{ scale: 0.6, opacity: 0.9 }}
+              animate={{ scale: 2.4, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.85, ease: "easeOut" }}
+            />
+          ))}
+        </AnimatePresence>
+
+        {/* Focus label */}
+        <AnimatePresence>
+          {hover && (
+            <motion.div
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18 }}
+              className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#facc15] text-black font-mono text-[9px] uppercase tracking-[0.3em] px-2 py-0.5"
+            >
+              LOCK ●
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {hover && (
+            <motion.div
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 4 }}
+              transition={{ duration: 0.18 }}
+              className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[9px] uppercase tracking-[0.35em] text-foreground/60"
+            >
+              TGT_01 // ACQUIRED
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.button>
+    </div>
+  );
+}
+
 
 function FrameTicker() {
   return (
