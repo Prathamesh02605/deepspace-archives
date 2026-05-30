@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+
 
 /**
  * Hero-section-scoped holographic HUD. Animated, meaningful overlays:
