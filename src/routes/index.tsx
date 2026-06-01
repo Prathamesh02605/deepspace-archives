@@ -10,7 +10,9 @@ import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Skills } from "@/components/Skills";
+import { Experience } from "@/components/Experience";
 import { Projects } from "@/components/Projects";
+import { Certifications } from "@/components/Certifications";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
@@ -39,16 +41,18 @@ function Index() {
 
       {loaded && (
         <motion.main
-          initial={{ opacity: 0, filter: "blur(20px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="relative"
         >
           <Nav />
           <Hero />
           <About />
           <Skills />
+          <Experience />
           <Projects />
+          <Certifications />
           <Contact />
           <Footer />
         </motion.main>

@@ -14,8 +14,10 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
         clearInterval(id);
         setProgress(100);
         setTimeout(() => setPhase("transition"), 450);
-        setTimeout(() => setPhase("done"), 450 + 1400);
-        setTimeout(onDone, 450 + 1400 + 100);
+        setTimeout(() => {
+          onDone();
+          setPhase("done");
+        }, 450 + 1100);
         return;
       }
       setProgress(Math.floor(p));
