@@ -158,7 +158,7 @@ export function Hero() {
           className="mt-12 flex flex-wrap items-center gap-4"
         >
           <MagneticButton
-            href="#projects"
+            href="#about"
             className="magnetic-btn group relative overflow-hidden flex items-center gap-3 px-8 py-4 bg-[var(--primary)] text-primary-foreground font-mono text-xs uppercase tracking-[0.25em] hover:shadow-[0_0_50px_oklch(0.72_0.18_230/0.7)]"
           >
             <span className="relative z-10">EXPLORE</span>

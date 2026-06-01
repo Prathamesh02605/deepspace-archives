@@ -22,7 +22,14 @@ export function Nav() {
         </a>
 
         <nav className="hidden md:flex items-center gap-8 font-mono text-[10px] uppercase tracking-[0.3em]">
-          {[["01", "About", "#about"], ["02", "Skills", "#skills"], ["03", "Projects", "#projects"], ["04", "Contact", "#contact"]].map(([n, l, h]) => (
+          {[
+            ["01", "About", "#about"],
+            ["02", "Skills", "#skills"],
+            ["03", "Log", "#experience"],
+            ["04", "Archive", "#projects"],
+            ["05", "Awards", "#certifications"],
+            ["06", "Contact", "#contact"],
+          ].map(([n, l, h]) => (
             <a key={l} href={h} className="group flex items-center gap-2 text-muted-foreground hover:text-[var(--cyan)] transition-colors" data-cursor-hover>
               <span className="text-[var(--cyan)]/60">{n}</span>
               <span>{l}</span>
