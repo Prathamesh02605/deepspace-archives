@@ -86,11 +86,11 @@ export function Certifications() {
   };
 
   return (
-    <section id="certifications" className="relative py-32 px-6 lg:px-12">
+    <section id="certifications" className="relative py-20 md:py-24 px-5 md:px-6 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="05" title="ACHIEVEMENTS" />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {CERTS.map((c, i) => (
             <motion.button
               key={c.id}
