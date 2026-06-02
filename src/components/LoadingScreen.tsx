@@ -13,11 +13,13 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
         p = 100;
         clearInterval(id);
         setProgress(100);
-        setTimeout(() => setPhase("transition"), 450);
-        setTimeout(() => {
-          onDone();
-          setPhase("done");
-        }, 450 + 1100);
+        // Hold briefly at 100%, then run the single yellow sweep.
+        setTimeout(() => setPhase("transition"), 350);
+        // Mount the page UNDER the yellow curtain so there's no second flash.
+        // onDone fires mid-sweep — main content is ready before the curtain lifts.
+        setTimeout(() => onDone(), 350 + 700);
+        // Unmount the loader instantly once the sweep has fully exited the screen.
+        setTimeout(() => setPhase("done"), 350 + 1500);
         return;
       }
       setProgress(Math.floor(p));
