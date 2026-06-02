@@ -46,6 +46,22 @@ const CERTS: Cert[] = [
     desc: "Generative visuals with canvas, WebGL and shaders — focused on aesthetic and intent.",
     bullets: ["GLSL shader basics", "Noise-driven composition", "Real-time interactivity"],
   },
+  {
+    id: "CRT-005",
+    name: "UI/UX Design Principles",
+    issuer: "Interaction Design Foundation",
+    year: "2024",
+    desc: "Human-centered design, information architecture and accessibility-first interface practice.",
+    bullets: ["Heuristic evaluation", "Accessible color & contrast", "Journey mapping"],
+  },
+  {
+    id: "CRT-006",
+    name: "Git & Modern Workflows",
+    issuer: "GitHub Campus",
+    year: "2023",
+    desc: "Branching strategies, code review etiquette and automated CI pipelines for shipping fast.",
+    bullets: ["Trunk-based development", "PR review hygiene", "GitHub Actions basics"],
+  },
 ];
 
 export function Certifications() {
