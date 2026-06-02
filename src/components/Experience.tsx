@@ -30,7 +30,7 @@ export function Experience() {
 
         <div className="relative">
           {/* Vertical rail */}
-          <div className="absolute left-[7.5rem] top-0 bottom-0 w-px bg-[#facc15]/30 hidden md:block" />
+          <div className="absolute left-[10.5rem] top-0 bottom-0 w-px bg-[#facc15]/30 hidden md:block" />
 
           <div className="space-y-6">
             {ENTRIES.map((e, i) => (
