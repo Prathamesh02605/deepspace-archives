@@ -113,7 +113,7 @@ export function DetailPanel({
             </div>
 
             {/* Body */}
-            <div className="px-6 pt-6 pb-7 max-h-[70vh] overflow-y-auto">
+            <div data-lenis-prevent className="px-6 pt-6 pb-7 max-h-[70vh] overflow-y-auto overscroll-contain">
               {data.subtitle && (
                 <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#facc15] mb-2">
                   {data.subtitle}
