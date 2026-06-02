@@ -12,36 +12,12 @@ type Entry = {
 
 const ENTRIES: Entry[] = [
   {
-    year: "2026 —",
+    year: "JAN 2026 — PRESENT",
     role: "Independent Developer",
     org: "Self-directed / Portfolio",
     loc: "REMOTE",
     desc: "Shipping cinematic web experiences, exploring motion design, generative visuals, and editorial UI systems.",
     tags: ["React", "Motion", "WebGL"],
-  },
-  {
-    year: "2025",
-    role: "Frontend Intern",
-    org: "Indie Studio Collab",
-    loc: "ONLINE",
-    desc: "Built component systems and animated marketing surfaces. Owned tokens, motion specs, and accessibility passes.",
-    tags: ["Next.js", "Tailwind", "Figma"],
-  },
-  {
-    year: "2024",
-    role: "Workshop Lead",
-    org: "Campus Tech Circle",
-    loc: "MAHARASHTRA, IN",
-    desc: "Ran hands-on sessions on React, Git, and modern UI tooling for peers entering the field.",
-    tags: ["Teaching", "React", "Mentoring"],
-  },
-  {
-    year: "2023",
-    role: "Hackathon Builder",
-    org: "Open Source / Side Quests",
-    loc: "GLOBAL",
-    desc: "Prototyped a string of weekend projects — design systems, generative art tools, audio experiments.",
-    tags: ["Hackathons", "Prototyping"],
   },
 ];
 
