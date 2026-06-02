@@ -13,11 +13,13 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
         p = 100;
         clearInterval(id);
         setProgress(100);
-        setTimeout(() => setPhase("transition"), 450);
-        setTimeout(() => {
-          onDone();
-          setPhase("done");
-        }, 450 + 1100);
+        // Hold briefly at 100%, then run the single yellow sweep.
+        setTimeout(() => setPhase("transition"), 350);
+        // Mount the page UNDER the yellow curtain so there's no second flash.
+        // onDone fires mid-sweep — main content is ready before the curtain lifts.
+        setTimeout(() => onDone(), 350 + 700);
+        // Unmount the loader instantly once the sweep has fully exited the screen.
+        setTimeout(() => setPhase("done"), 350 + 1500);
         return;
       }
       setProgress(Math.floor(p));
@@ -31,9 +33,10 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
     <AnimatePresence>
       {phase !== "done" && (
         <motion.div
+          key="loader"
           className="fixed inset-0 z-[200] overflow-hidden"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0 }}
           style={{
             background:
               "radial-gradient(ellipse at 30% 40%, #161616 0%, #0a0a0a 55%, #000000 100%)",
@@ -277,13 +280,19 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
             </>
           )}
 
-          {/* Transition sweep — full traversal, no early fade */}
+          {/* Transition sweep — wipes in to cover, then wipes off to the right. One yellow, not two. */}
           {phase === "transition" && (
             <motion.div
-              initial={{ width: `${BAR_VW}vw`, opacity: 1 }}
-              animate={{ width: "100vw", opacity: 1 }}
-              transition={{ duration: 1.1, ease: [0.7, 0, 0.25, 1] }}
               className="absolute top-0 left-0 h-full bg-[#facc15]"
+              initial={{ width: `${BAR_VW}vw`, x: 0 }}
+              animate={{
+                width: ["100vw", "100vw"],
+                x: ["0vw", "100vw"],
+              }}
+              transition={{
+                width: { duration: 0.7, ease: [0.7, 0, 0.25, 1] },
+                x: { duration: 0.7, ease: [0.7, 0, 0.25, 1], delay: 0.75 },
+              }}
               style={{
                 boxShadow: "0 0 80px #facc15, 0 0 160px rgba(250,204,21,0.6)",
               }}
