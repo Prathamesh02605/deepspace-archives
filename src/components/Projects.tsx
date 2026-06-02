@@ -124,7 +124,7 @@ export function Projects() {
   };
 
   return (
-    <section id="projects" className="relative py-32 px-6 lg:px-12">
+    <section id="projects" className="relative py-20 md:py-24 px-5 md:px-6 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="04" title="ARCHIVE" />
 

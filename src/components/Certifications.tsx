@@ -46,6 +46,22 @@ const CERTS: Cert[] = [
     desc: "Generative visuals with canvas, WebGL and shaders — focused on aesthetic and intent.",
     bullets: ["GLSL shader basics", "Noise-driven composition", "Real-time interactivity"],
   },
+  {
+    id: "CRT-005",
+    name: "UI/UX Design Principles",
+    issuer: "Interaction Design Foundation",
+    year: "2024",
+    desc: "Human-centered design, information architecture and accessibility-first interface practice.",
+    bullets: ["Heuristic evaluation", "Accessible color & contrast", "Journey mapping"],
+  },
+  {
+    id: "CRT-006",
+    name: "Git & Modern Workflows",
+    issuer: "GitHub Campus",
+    year: "2023",
+    desc: "Branching strategies, code review etiquette and automated CI pipelines for shipping fast.",
+    bullets: ["Trunk-based development", "PR review hygiene", "GitHub Actions basics"],
+  },
 ];
 
 export function Certifications() {
@@ -70,11 +86,11 @@ export function Certifications() {
   };
 
   return (
-    <section id="certifications" className="relative py-32 px-6 lg:px-12">
+    <section id="certifications" className="relative py-20 md:py-24 px-5 md:px-6 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="05" title="ACHIEVEMENTS" />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {CERTS.map((c, i) => (
             <motion.button
               key={c.id}

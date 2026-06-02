@@ -3,7 +3,7 @@ import { SectionLabel } from "./SectionLabel";
 
 export function About() {
   return (
-    <section id="about" className="relative py-32 px-6 lg:px-12">
+    <section id="about" className="relative py-20 md:py-24 px-5 md:px-6 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="01" title="IDENTITY" />
 

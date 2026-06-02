@@ -12,48 +12,25 @@ type Entry = {
 
 const ENTRIES: Entry[] = [
   {
-    year: "2026 —",
+    year: "JAN 2026 — PRESENT",
     role: "Independent Developer",
     org: "Self-directed / Portfolio",
     loc: "REMOTE",
     desc: "Shipping cinematic web experiences, exploring motion design, generative visuals, and editorial UI systems.",
     tags: ["React", "Motion", "WebGL"],
   },
-  {
-    year: "2025",
-    role: "Frontend Intern",
-    org: "Indie Studio Collab",
-    loc: "ONLINE",
-    desc: "Built component systems and animated marketing surfaces. Owned tokens, motion specs, and accessibility passes.",
-    tags: ["Next.js", "Tailwind", "Figma"],
-  },
-  {
-    year: "2024",
-    role: "Workshop Lead",
-    org: "Campus Tech Circle",
-    loc: "MAHARASHTRA, IN",
-    desc: "Ran hands-on sessions on React, Git, and modern UI tooling for peers entering the field.",
-    tags: ["Teaching", "React", "Mentoring"],
-  },
-  {
-    year: "2023",
-    role: "Hackathon Builder",
-    org: "Open Source / Side Quests",
-    loc: "GLOBAL",
-    desc: "Prototyped a string of weekend projects — design systems, generative art tools, audio experiments.",
-    tags: ["Hackathons", "Prototyping"],
-  },
 ];
 
 export function Experience() {
   return (
-    <section id="experience" className="relative py-32 px-6 lg:px-12">
+    <section id="experience" className="relative py-20 md:py-24 px-5 md:px-6 lg:px-12">
+      
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="03" title="MISSION LOG" />
 
         <div className="relative">
           {/* Vertical rail */}
-          <div className="absolute left-[7.5rem] top-0 bottom-0 w-px bg-[#facc15]/30 hidden md:block" />
+          <div className="absolute left-[10.5rem] top-0 bottom-0 w-px bg-[#facc15]/30 hidden md:block" />
 
           <div className="space-y-6">
             {ENTRIES.map((e, i) => (
@@ -63,11 +40,11 @@ export function Experience() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ delay: i * 0.12, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="relative grid md:grid-cols-[8rem_1fr] gap-4 md:gap-8 group"
+                className="relative grid md:grid-cols-[11rem_1fr] gap-4 md:gap-8 group"
               >
                 {/* Year + node */}
                 <div className="relative flex md:flex-col md:items-end items-center gap-3 md:gap-2 md:pr-4">
-                  <span className="font-display text-2xl font-black text-[#facc15] tabular-nums leading-none">
+                  <span className="font-display text-sm md:text-base font-black text-[#facc15] tabular-nums leading-tight md:text-right">
                     {e.year}
                   </span>
                   <span className="hidden md:block font-mono text-[9px] uppercase tracking-[0.4em] text-foreground/40">
