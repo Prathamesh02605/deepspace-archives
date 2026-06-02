@@ -61,7 +61,7 @@ export function Contact() {
 
           {/* Form */}
           <motion.form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
