@@ -280,13 +280,19 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
             </>
           )}
 
-          {/* Transition sweep — full traversal, no early fade */}
+          {/* Transition sweep — wipes in to cover, then wipes off to the right. One yellow, not two. */}
           {phase === "transition" && (
             <motion.div
-              initial={{ width: `${BAR_VW}vw`, opacity: 1 }}
-              animate={{ width: "100vw", opacity: 1 }}
-              transition={{ duration: 1.1, ease: [0.7, 0, 0.25, 1] }}
               className="absolute top-0 left-0 h-full bg-[#facc15]"
+              initial={{ width: `${BAR_VW}vw`, x: 0 }}
+              animate={{
+                width: ["100vw", "100vw"],
+                x: ["0vw", "100vw"],
+              }}
+              transition={{
+                width: { duration: 0.7, ease: [0.7, 0, 0.25, 1] },
+                x: { duration: 0.7, ease: [0.7, 0, 0.25, 1], delay: 0.75 },
+              }}
               style={{
                 boxShadow: "0 0 80px #facc15, 0 0 160px rgba(250,204,21,0.6)",
               }}
