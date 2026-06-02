@@ -33,9 +33,10 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
     <AnimatePresence>
       {phase !== "done" && (
         <motion.div
+          key="loader"
           className="fixed inset-0 z-[200] overflow-hidden"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0 }}
           style={{
             background:
               "radial-gradient(ellipse at 30% 40%, #161616 0%, #0a0a0a 55%, #000000 100%)",
