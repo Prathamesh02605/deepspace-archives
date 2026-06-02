@@ -56,6 +56,7 @@ function Index() {
           <Certifications />
           <Contact />
           <Footer />
+          <ScrollToTop />
         </motion.main>
       )}
     </>
