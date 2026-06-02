@@ -4,7 +4,7 @@ import { SectionLabel } from "./SectionLabel";
 
 export function Contact() {
   return (
-    <section id="contact" className="relative py-32 px-6 lg:px-12">
+    <section id="contact" className="relative py-20 md:py-24 px-5 md:px-6 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="04" title="TRANSMISSION" />
 

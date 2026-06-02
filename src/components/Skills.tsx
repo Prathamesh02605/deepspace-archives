@@ -182,7 +182,7 @@ export function Skills() {
   };
 
   return (
-    <section id="skills" className="relative py-32 px-6 lg:px-12">
+    <section id="skills" className="relative py-20 md:py-24 px-5 md:px-6 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="02" title="CAPABILITIES" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
