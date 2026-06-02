@@ -39,11 +39,11 @@ export function Experience() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ delay: i * 0.12, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="relative grid md:grid-cols-[8rem_1fr] gap-4 md:gap-8 group"
+                className="relative grid md:grid-cols-[11rem_1fr] gap-4 md:gap-8 group"
               >
                 {/* Year + node */}
                 <div className="relative flex md:flex-col md:items-end items-center gap-3 md:gap-2 md:pr-4">
-                  <span className="font-display text-2xl font-black text-[#facc15] tabular-nums leading-none">
+                  <span className="font-display text-sm md:text-base font-black text-[#facc15] tabular-nums leading-tight md:text-right">
                     {e.year}
                   </span>
                   <span className="hidden md:block font-mono text-[9px] uppercase tracking-[0.4em] text-foreground/40">
