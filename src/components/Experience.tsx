@@ -23,7 +23,8 @@ const ENTRIES: Entry[] = [
 
 export function Experience() {
   return (
-    <section id="experience" className="relative py-32 px-6 lg:px-12">
+    <section id="experience" className="relative py-20 md:py-24 px-5 md:px-6 lg:px-12">
+      {/* ... keep existing code */}
       <div className="mx-auto max-w-7xl">
         <SectionLabel index="03" title="MISSION LOG" />
 
