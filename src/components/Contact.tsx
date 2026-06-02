@@ -1,8 +1,15 @@
-import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, Send } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Github, Linkedin, Send, Check } from "lucide-react";
+import { useState } from "react";
 import { SectionLabel } from "./SectionLabel";
 
 export function Contact() {
+  const [sent, setSent] = useState(false);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSent(true);
+    setTimeout(() => setSent(false), 4500);
+  };
   return (
     <section id="contact" className="relative py-20 md:py-24 px-5 md:px-6 lg:px-12">
       <div className="mx-auto max-w-7xl">
