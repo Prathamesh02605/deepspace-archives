@@ -24,11 +24,10 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
         setProgress(100);
         // Hold briefly at 100%, then run the single yellow sweep.
         timersRef.current.push(window.setTimeout(() => setPhase("transition"), 300));
-        // Mount the page UNDER the yellow curtain so there's no second flash.
-        // onDone fires mid-sweep — main content is ready before the curtain lifts.
-        timersRef.current.push(window.setTimeout(() => onDoneRef.current(), 300 + 620));
-        // Unmount the loader instantly once the sweep has fully exited the screen.
-        timersRef.current.push(window.setTimeout(() => setPhase("done"), 300 + 1380));
+        // Mount once the single yellow curtain has covered the viewport.
+        timersRef.current.push(window.setTimeout(() => onDoneRef.current(), 300 + 640));
+        // Remove the loader immediately after reveal is ready — no second yellow motion.
+        timersRef.current.push(window.setTimeout(() => setPhase("done"), 300 + 760));
         return;
       }
       setProgress(Math.floor(p));
@@ -293,18 +292,18 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
             </>
           )}
 
-          {/* Transition sweep — wipes in to cover, then wipes off to the right. One yellow, not two. */}
+          {/* Transition sweep — one cover/reveal only. */}
           {phase === "transition" && (
             <motion.div
               className="absolute top-0 left-0 h-full bg-[#facc15]"
               initial={{ width: `${BAR_VW}vw`, x: 0 }}
               animate={{
-                width: ["100vw", "100vw"],
-                x: ["0vw", "100vw"],
+                width: "100vw",
+                x: "0vw",
               }}
               transition={{
-                width: { duration: 0.62, ease: [0.7, 0, 0.25, 1] },
-                x: { duration: 0.64, ease: [0.7, 0, 0.25, 1], delay: 0.68 },
+                duration: 0.64,
+                ease: [0.7, 0, 0.25, 1],
               }}
               style={{
                 boxShadow: "0 0 80px #facc15, 0 0 160px rgba(250,204,21,0.6)",
