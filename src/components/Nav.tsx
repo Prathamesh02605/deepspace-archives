@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useState } from "react";
+import type { MouseEvent } from "react";
 import { Menu, X } from "lucide-react";
 
 const ITEMS: [string, string, string][] = [
@@ -17,7 +18,7 @@ export function Nav() {
   const blur = useTransform(scrollY, [0, 100], ["blur(12px)", "blur(20px)"]);
   const border = useTransform(scrollY, [0, 100], ["rgba(250,204,21,0.25)", "rgba(250,204,21,0.42)"]);
   const [open, setOpen] = useState(false);
-  const scrollTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const scrollTop = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     window.dispatchEvent(new Event("pk-scroll-top"));
   };
