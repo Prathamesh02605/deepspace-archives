@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { SectionLabel } from "./SectionLabel";
+import { DetailPanel, type DetailPanelData } from "./DetailPanel";
+import { useState } from "react";
 
 type Entry = {
   year: string;
@@ -7,7 +9,9 @@ type Entry = {
   org: string;
   loc: string;
   desc: string;
+  detail: string;
   tags: string[];
+  bullets: string[];
 };
 
 const ENTRIES: Entry[] = [
@@ -17,11 +21,39 @@ const ENTRIES: Entry[] = [
     org: "Self-directed / Portfolio",
     loc: "REMOTE",
     desc: "Shipping cinematic web experiences, exploring motion design, generative visuals, and editorial UI systems.",
+    detail:
+      "A self-directed mission focused on building immersive portfolio systems, sharpening frontend engineering, and translating game-inspired interface language into readable web experiences.",
     tags: ["React", "Motion", "WebGL"],
+    bullets: [
+      "Prototype cinematic UI panels with HUD-style motion and clear hierarchy.",
+      "Build responsive React experiences optimized for smooth scrolling and interaction feedback.",
+      "Study modern frontend patterns while documenting experiments as portfolio-grade case files.",
+    ],
   },
 ];
 
 export function Experience() {
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState<DetailPanelData | null>(null);
+
+  const handleOpen = (e: Entry, i: number) => {
+    setData({
+      id: `LOG-${String(i + 1).padStart(3, "0")}`,
+      title: e.role,
+      subtitle: "MISSION LOG // DETAIL",
+      description: e.detail,
+      bullets: e.bullets,
+      tags: e.tags,
+      meta: [
+        { k: "DURATION", v: e.year },
+        { k: "LOCATION", v: e.loc },
+        { k: "ORIGIN", v: e.org },
+      ],
+      status: "ACTIVE",
+    });
+    setOpen(true);
+  };
+
   return (
     <section id="experience" className="relative py-20 md:py-24 px-5 md:px-6 lg:px-12">
       
@@ -56,7 +88,12 @@ export function Experience() {
                 </div>
 
                 {/* Card */}
-                <div className="relative glass-panel corner-brackets p-6 noise-overlay">
+                <button
+                  type="button"
+                  onClick={() => handleOpen(e, i)}
+                  className="relative glass-panel glass-panel-hover corner-brackets p-6 noise-overlay text-left cursor-pointer overflow-hidden"
+                  data-cursor-hover
+                >
                   {/* Header chip */}
                   <div className="flex flex-wrap items-center gap-2 mb-3">
                     <span className="bg-[#facc15] text-black font-mono text-[9px] uppercase tracking-[0.4em] px-2 py-0.5">
@@ -92,6 +129,11 @@ export function Experience() {
                     ))}
                   </div>
 
+                  <div className="mt-5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.4em] text-[#facc15] opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="h-px w-6 bg-[#facc15]" />
+                    TAP TO EXPAND
+                  </div>
+
                   <motion.div
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
@@ -100,12 +142,13 @@ export function Experience() {
                     className="absolute bottom-0 left-0 h-[2px] w-1/3 bg-[#facc15] origin-left"
                     style={{ boxShadow: "0 0 12px rgba(250,204,21,0.5)" }}
                   />
-                </div>
+                </button>
               </motion.div>
             ))}
           </div>
         </div>
       </div>
+      <DetailPanel open={open} data={data} onClose={() => setOpen(false)} />
     </section>
   );
 }
