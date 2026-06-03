@@ -1,31 +1,44 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function LoadingScreen({ onDone }: { onDone: () => void }) {
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<"loading" | "transition" | "done">("loading");
+  const onDoneRef = useRef(onDone);
+  const completedRef = useRef(false);
+  const timersRef = useRef<number[]>([]);
+
+  useEffect(() => {
+    onDoneRef.current = onDone;
+  }, [onDone]);
 
   useEffect(() => {
     let p = 0;
     const id = setInterval(() => {
+      if (completedRef.current) return;
       p += Math.random() * 5 + 2;
       if (p >= 100) {
+        completedRef.current = true;
         p = 100;
         clearInterval(id);
         setProgress(100);
         // Hold briefly at 100%, then run the single yellow sweep.
-        setTimeout(() => setPhase("transition"), 350);
+        timersRef.current.push(window.setTimeout(() => setPhase("transition"), 300));
         // Mount the page UNDER the yellow curtain so there's no second flash.
         // onDone fires mid-sweep — main content is ready before the curtain lifts.
-        setTimeout(() => onDone(), 350 + 700);
+        timersRef.current.push(window.setTimeout(() => onDoneRef.current(), 300 + 620));
         // Unmount the loader instantly once the sweep has fully exited the screen.
-        setTimeout(() => setPhase("done"), 350 + 1500);
+        timersRef.current.push(window.setTimeout(() => setPhase("done"), 300 + 1380));
         return;
       }
       setProgress(Math.floor(p));
     }, 80);
-    return () => clearInterval(id);
-  }, [onDone]);
+    return () => {
+      clearInterval(id);
+      timersRef.current.forEach(window.clearTimeout);
+      timersRef.current = [];
+    };
+  }, []);
 
   const BAR_VW = 3.5; // thinner
 
@@ -290,8 +303,8 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                 x: ["0vw", "100vw"],
               }}
               transition={{
-                width: { duration: 0.7, ease: [0.7, 0, 0.25, 1] },
-                x: { duration: 0.7, ease: [0.7, 0, 0.25, 1], delay: 0.75 },
+                width: { duration: 0.62, ease: [0.7, 0, 0.25, 1] },
+                x: { duration: 0.64, ease: [0.7, 0, 0.25, 1], delay: 0.68 },
               }}
               style={{
                 boxShadow: "0 0 80px #facc15, 0 0 160px rgba(250,204,21,0.6)",
