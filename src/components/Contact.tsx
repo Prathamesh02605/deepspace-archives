@@ -6,7 +6,7 @@ import { SectionLabel } from "./SectionLabel";
 export function Contact() {
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const canSend = form.name.trim() && form.email.trim() && form.message.trim();
+  const canSend = Boolean(form.name.trim() && form.email.trim() && form.message.trim());
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
