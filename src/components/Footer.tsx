@@ -27,9 +27,14 @@ export function Footer() {
         >
           © 2026 · PK_OS
         </button>
-        <div className="font-display text-sm text-center text-[var(--footer-text)]">
+        <button
+          type="button"
+          onClick={scrollTop}
+          className="font-display text-sm text-center text-[var(--footer-text)] hover:text-[var(--footer-accent)] transition-colors"
+          data-cursor-hover
+        >
           Designed & Developed by <span className="text-[var(--footer-accent)] font-semibold">Prathamesh Khachane</span>
-        </div>
+        </button>
         <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--footer-muted)] flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--footer-accent)] animate-pulse shadow-[0_0_8px_var(--footer-accent)]" />
           END OF TRANSMISSION
