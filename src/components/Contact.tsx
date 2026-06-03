@@ -5,10 +5,13 @@ import { SectionLabel } from "./SectionLabel";
 
 export function Contact() {
   const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const canSend = Boolean(form.name.trim() && form.email.trim() && form.message.trim());
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!canSend) return;
     setSent(true);
-    setTimeout(() => setSent(false), 4500);
   };
   return (
     <section id="contact" className="relative py-20 md:py-24 px-5 md:px-6 lg:px-12">
@@ -79,13 +82,16 @@ export function Contact() {
 
             <div className="grid sm:grid-cols-2 gap-5">
               {[
-                { label: "IDENTIFIER", placeholder: "your name", type: "text" },
-                { label: "FREQUENCY", placeholder: "you@email.com", type: "email" },
+                { label: "IDENTIFIER", placeholder: "your name", type: "text", key: "name" as const },
+                { label: "FREQUENCY", placeholder: "you@email.com", type: "email", key: "email" as const },
               ].map((f) => (
                 <div key={f.label} className="space-y-2">
                   <label className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">{f.label}</label>
                   <input
                     type={f.type}
+                    required
+                    value={form[f.key]}
+                    onChange={(e) => setForm((prev) => ({ ...prev, [f.key]: e.target.value }))}
                     placeholder={f.placeholder}
                     className="w-full bg-transparent border-b border-border focus:border-[var(--cyan)] py-2 outline-none transition-all focus:shadow-[0_4px_20px_-10px_oklch(0.85_0.16_195)] placeholder:text-muted-foreground/50"
                   />
@@ -97,6 +103,9 @@ export function Contact() {
               <label className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">PAYLOAD</label>
               <textarea
                 rows={5}
+                required
+                value={form.message}
+                onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))}
                 placeholder="transmit your message..."
                 className="w-full bg-transparent border border-border focus:border-[var(--cyan)] p-3 outline-none transition-all focus:shadow-[0_0_30px_-10px_oklch(0.85_0.16_195)] placeholder:text-muted-foreground/50 resize-none"
               />
@@ -105,8 +114,8 @@ export function Contact() {
             <div className="flex flex-wrap items-center gap-4">
               <button
                 type="submit"
-                disabled={sent}
-                className="group relative overflow-hidden flex items-center gap-3 px-7 py-4 bg-[var(--primary)] text-primary-foreground font-mono text-xs uppercase tracking-[0.25em] transition-all hover:shadow-[0_0_40px_oklch(0.72_0.18_230/0.7)] disabled:opacity-60"
+                disabled={sent || !canSend}
+                className="group relative overflow-hidden flex items-center gap-3 px-7 py-4 bg-[var(--primary)] text-primary-foreground font-mono text-xs uppercase tracking-[0.25em] transition-all hover:shadow-[0_0_40px_oklch(0.72_0.18_230/0.7)] disabled:opacity-45 disabled:cursor-not-allowed"
                 data-cursor-hover
               >
                 <span className="relative z-10">{sent ? "TRANSMITTED" : "TRANSMIT"}</span>
@@ -139,6 +148,11 @@ export function Contact() {
                   </motion.div>
                 )}
               </AnimatePresence>
+              {!sent && !canSend && (
+                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                  Fill all fields to unlock transmission.
+                </div>
+              )}
             </div>
           </motion.form>
         </div>

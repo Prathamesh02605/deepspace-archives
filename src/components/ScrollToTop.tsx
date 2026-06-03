@@ -11,7 +11,7 @@ export function ScrollToTop() {
   });
 
   const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.dispatchEvent(new Event("pk-scroll-top"));
   };
 
   return (
