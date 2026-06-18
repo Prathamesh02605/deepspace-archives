@@ -162,7 +162,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: phase === "transition" ? 0 : 0.18 }}
                 transition={{ duration: 1, delay: 0.3 }}
-                className="absolute inset-0 font-display font-black leading-[0.78] tracking-[-0.05em] text-[11rem] md:text-[16rem] select-none"
+                className="absolute inset-0 font-display font-black leading-[0.78] tracking-[-0.05em] text-[7rem] md:text-[10rem] select-none"
                 style={{
                   WebkitTextStroke: "1.5px #facc15",
                   color: "transparent",
