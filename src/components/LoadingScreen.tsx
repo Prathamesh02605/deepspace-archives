@@ -188,7 +188,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                       duration: 0.9,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="relative font-display text-[11rem] md:text-[16rem] font-black leading-[0.78] tracking-[-0.05em] text-white"
+                    className="relative font-display text-[7rem] md:text-[10rem] font-black leading-[0.78] tracking-[-0.05em] text-white"
                   >
                     {c}
                     {/* glitch ghosts */}
