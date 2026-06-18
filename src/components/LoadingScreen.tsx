@@ -39,7 +39,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
     };
   }, []);
 
-  const BAR_VW = 3.5; // thinner
+  const BAR_VW = 2.5; // thinner bar
 
   return (
     <AnimatePresence>
@@ -162,7 +162,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: phase === "transition" ? 0 : 0.18 }}
                 transition={{ duration: 1, delay: 0.3 }}
-                className="absolute inset-0 font-display font-black leading-[0.78] tracking-[-0.05em] text-[11rem] md:text-[16rem] select-none"
+                className="absolute inset-0 font-display font-black leading-[0.78] tracking-[-0.05em] text-[7rem] md:text-[10rem] select-none"
                 style={{
                   WebkitTextStroke: "1.5px #facc15",
                   color: "transparent",
@@ -188,7 +188,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                       duration: 0.9,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="relative font-display text-[11rem] md:text-[16rem] font-black leading-[0.78] tracking-[-0.05em] text-white"
+                    className="relative font-display text-[7rem] md:text-[10rem] font-black leading-[0.78] tracking-[-0.05em] text-white"
                   >
                     {c}
                     {/* glitch ghosts */}
@@ -216,7 +216,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                   initial={{ scale: 0 }}
                   animate={{ scale: phase === "transition" ? 0 : 1 }}
                   transition={{ delay: 0.9, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="ml-2 h-3 w-3 self-end mb-8 bg-[#facc15] origin-center"
+                  className="ml-2 h-3 w-3 self-end mb-6 bg-[#facc15] origin-center"
                   style={{ boxShadow: "0 0 20px #facc15" }}
                 />
               </div>
