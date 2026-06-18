@@ -39,7 +39,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
     };
   }, []);
 
-  const BAR_VW = 3.5; // thinner
+  const BAR_VW = 2.5; // thinner bar
 
   return (
     <AnimatePresence>
