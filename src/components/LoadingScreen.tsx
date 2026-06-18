@@ -216,7 +216,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                   initial={{ scale: 0 }}
                   animate={{ scale: phase === "transition" ? 0 : 1 }}
                   transition={{ delay: 0.9, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="ml-2 h-3 w-3 self-end mb-8 bg-[#facc15] origin-center"
+                  className="ml-2 h-3 w-3 self-end mb-6 bg-[#facc15] origin-center"
                   style={{ boxShadow: "0 0 20px #facc15" }}
                 />
               </div>
