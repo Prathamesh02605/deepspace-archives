@@ -111,20 +111,10 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
               animate={{ opacity: phase === "transition" ? 0 : 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="mb-3 font-mono text-[8px] uppercase tracking-[0.55em] text-[var(--loader-text)]/60">
-                P · K · H · A · C · H · A · N · E
-              </div>
               <div className="relative flex items-baseline">
                 <span className="font-display text-[3.5rem] leading-[0.85] tracking-[-0.04em] font-black text-[var(--loader-text)] md:text-[5rem]">
                   PK
                 </span>
-                <span className="ml-2 font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--loader-text)]/50 self-end mb-2">
-                  / 001
-                </span>
-              </div>
-              <div className="mt-3 h-px w-14 bg-[var(--loader-accent)]" />
-              <div className="mt-3 font-display text-[10px] uppercase tracking-[0.45em] text-[var(--loader-text)]/80 md:text-xs">
-                Portfolio · 2026
               </div>
             </motion.div>
           </div>
