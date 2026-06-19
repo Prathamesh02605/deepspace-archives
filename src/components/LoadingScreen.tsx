@@ -143,9 +143,6 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                   <span key={i} className="block h-[5px] w-[5px] bg-[var(--loader-text)]/30" />
                 ))}
               </div>
-              <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.35em] text-[var(--loader-text)]/45">
-                Updating...
-              </div>
             </motion.div>
           )}
 
