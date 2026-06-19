@@ -140,48 +140,6 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
             </motion.div>
           )}
 
-          {/* Horizontal scan-line + bottom HUD widget + tagline (right half) */}
-          {phase === "loading" && (
-            <motion.div
-              className="absolute left-0 right-0 bottom-[22%] hidden md:block"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-            >
-              {/* faint horizontal divider line across the whole viewport */}
-              <div className="h-px w-full bg-[var(--loader-text)]/15" />
-
-              {/* HUD widget sitting just above the line, right-of-center */}
-              <div className="absolute -top-12 left-[55%] flex items-start gap-2">
-                {/* yellow downward triangle */}
-                <svg width="14" height="14" viewBox="0 0 14 14" className="mt-[2px]">
-                  <polygon points="7,12 1,3 13,3" fill="var(--loader-accent)" />
-                  <circle cx="7" cy="6.5" r="1" fill="var(--loader-bg)" />
-                </svg>
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-1.5">
-                    <div className="h-[7px] w-[7px] border border-[var(--loader-text)]/40 flex items-center justify-center">
-                      <span className="text-[6px] leading-none text-[var(--loader-text)]/50">+</span>
-                    </div>
-                    <span className="font-mono text-[7px] uppercase tracking-[0.25em] text-[var(--loader-text)]/55 leading-tight">
-                      Mission-Dependent Payload<br />System Interfaces
-                    </span>
-                  </div>
-                  {/* dot grid */}
-                  <div className="mt-1 ml-[14px] grid grid-cols-6 gap-[2px]">
-                    {Array.from({ length: 12 }).map((_, i) => (
-                      <span key={i} className="block h-[3px] w-[3px] bg-[var(--loader-text)]/30" />
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* tagline sitting just below the line */}
-              <div className="absolute top-2 left-[55%] font-display text-xs tracking-[0.25em] text-[var(--loader-text)]/90">
-                OVER THE FRONTIER / INTO THE FRONT
-              </div>
-            </motion.div>
-          )}
 
           {/* Transition sweep — single yellow curtain */}
           {phase === "transition" && (
