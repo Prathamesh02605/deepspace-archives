@@ -111,25 +111,15 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
               animate={{ opacity: phase === "transition" ? 0 : 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="mb-3 font-mono text-[8px] uppercase tracking-[0.55em] text-[var(--loader-text)]/60">
-                P · K · H · A · C · H · A · N · E
-              </div>
               <div className="relative flex items-baseline">
                 <span className="font-display text-[3.5rem] leading-[0.85] tracking-[-0.04em] font-black text-[var(--loader-text)] md:text-[5rem]">
                   PK
                 </span>
-                <span className="ml-2 font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--loader-text)]/50 self-end mb-2">
-                  / 001
-                </span>
-              </div>
-              <div className="mt-3 h-px w-14 bg-[var(--loader-accent)]" />
-              <div className="mt-3 font-display text-[10px] uppercase tracking-[0.45em] text-[var(--loader-text)]/80 md:text-xs">
-                Portfolio · 2026
               </div>
             </motion.div>
           </div>
 
-          {/* Bottom-left: tiny yellow tick + huge percentage + "Updating..." */}
+          {/* Bottom-left: percentage */}
           {phase === "loading" && (
             <motion.div
               className="absolute bottom-8 left-5 md:bottom-10 md:left-7 flex flex-col items-start"
@@ -147,60 +137,9 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                   %
                 </span>
               </div>
-              {/* dotted segments */}
-              <div className="mt-2 flex gap-[3px]">
-                {Array.from({ length: 2 }).map((_, i) => (
-                  <span key={i} className="block h-[5px] w-[5px] bg-[var(--loader-text)]/30" />
-                ))}
-              </div>
-              <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.35em] text-[var(--loader-text)]/45">
-                Updating...
-              </div>
             </motion.div>
           )}
 
-          {/* Horizontal scan-line + bottom HUD widget + tagline (right half) */}
-          {phase === "loading" && (
-            <motion.div
-              className="absolute left-0 right-0 bottom-[22%] hidden md:block"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-            >
-              {/* faint horizontal divider line across the whole viewport */}
-              <div className="h-px w-full bg-[var(--loader-text)]/15" />
-
-              {/* HUD widget sitting just above the line, right-of-center */}
-              <div className="absolute -top-12 left-[55%] flex items-start gap-2">
-                {/* yellow downward triangle */}
-                <svg width="14" height="14" viewBox="0 0 14 14" className="mt-[2px]">
-                  <polygon points="7,12 1,3 13,3" fill="var(--loader-accent)" />
-                  <circle cx="7" cy="6.5" r="1" fill="var(--loader-bg)" />
-                </svg>
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-1.5">
-                    <div className="h-[7px] w-[7px] border border-[var(--loader-text)]/40 flex items-center justify-center">
-                      <span className="text-[6px] leading-none text-[var(--loader-text)]/50">+</span>
-                    </div>
-                    <span className="font-mono text-[7px] uppercase tracking-[0.25em] text-[var(--loader-text)]/55 leading-tight">
-                      Mission-Dependent Payload<br />System Interfaces
-                    </span>
-                  </div>
-                  {/* dot grid */}
-                  <div className="mt-1 ml-[14px] grid grid-cols-6 gap-[2px]">
-                    {Array.from({ length: 12 }).map((_, i) => (
-                      <span key={i} className="block h-[3px] w-[3px] bg-[var(--loader-text)]/30" />
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* tagline sitting just below the line */}
-              <div className="absolute top-2 left-[55%] font-display text-xs tracking-[0.25em] text-[var(--loader-text)]/90">
-                OVER THE FRONTIER / INTO THE FRONT
-              </div>
-            </motion.div>
-          )}
 
           {/* Transition sweep — single yellow curtain */}
           {phase === "transition" && (
