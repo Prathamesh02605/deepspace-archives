@@ -38,16 +38,17 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
 
   // Topographic contour SVG (subtle organic curves like the reference backdrop)
   const topoSvg = `data:image/svg+xml;utf8,${encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.05'>
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.06'>
       <path d='M-50,180 C220,120 420,260 640,220 C860,180 1050,300 1250,260 C1420,225 1560,290 1700,250'/>
       <path d='M-50,300 C200,260 380,380 620,330 C840,285 1040,420 1260,360 C1440,310 1570,400 1700,360'/>
       <path d='M-50,440 C220,400 420,520 660,470 C880,425 1080,560 1280,500 C1440,455 1580,540 1700,500'/>
       <path d='M-50,580 C200,540 400,660 640,610 C860,565 1060,700 1260,640 C1440,595 1580,680 1700,640'/>
       <path d='M-50,720 C220,680 420,800 660,750 C880,705 1080,840 1280,780 C1440,735 1580,820 1700,780'/>
-      <path d='M-50,60 C220,20 420,140 640,100 C860,60 1050,180 1250,140 C1420,105 1560,170 1700,130' stroke-opacity='0.035'/>
-      <path d='M200,-40 C260,200 180,440 320,640 C420,800 360,900 420,1000' stroke-opacity='0.04'/>
-      <path d='M900,-40 C960,220 880,460 1020,660 C1120,820 1060,920 1120,1020' stroke-opacity='0.035'/>
-      <path d='M1300,-40 C1360,200 1280,440 1420,640 C1520,800 1460,900 1520,1000' stroke-opacity='0.035'/>
+      <path d='M-50,60 C220,20 420,140 640,100 C860,60 1050,180 1250,140 C1420,105 1560,170 1700,130' stroke-opacity='0.04'/>
+      <path d='M200,-40 C260,200 180,440 320,640 C420,800 360,900 420,1000' stroke-opacity='0.045'/>
+      <path d='M900,-40 C960,220 880,460 1020,660 C1120,820 1060,920 1120,1020' stroke-opacity='0.04'/>
+      <path d='M1300,-40 C1360,200 1280,440 1420,640 C1520,800 1460,900 1520,1000' stroke-opacity='0.04'/>
+      <path d='M-50,820 C220,780 420,860 660,830 C880,805 1080,880 1280,850 C1440,825 1580,870 1700,850' stroke-opacity='0.035'/>
     </svg>`,
   )}`;
 
@@ -73,7 +74,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
 
           {/* Film grain */}
           <div
-            className="absolute inset-0 pointer-events-none opacity-[0.04] mix-blend-overlay"
+            className="absolute inset-0 pointer-events-none opacity-[0.05] mix-blend-overlay"
             style={{
               backgroundImage:
                 "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
@@ -86,7 +87,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(circle at 72% 50%, color-mix(in oklab, var(--loader-accent) 5%, transparent) 0%, transparent 40%)",
+                "radial-gradient(circle at 72% 50%, color-mix(in oklab, var(--loader-accent) 6%, transparent) 0%, transparent 42%)",
             }}
           />
 
@@ -104,6 +105,21 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
             </div>
           )}
 
+          {/* Top-left letter-spaced wordmark */}
+          <motion.div
+            className="absolute top-6 left-6 md:top-8 md:left-10 flex items-center gap-3"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: phase === "transition" ? 0 : 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="font-mono text-[10px] md:text-[11px] tracking-[0.5em] text-[var(--loader-text)]/60 uppercase">
+              P · K · H · A · C · H · A · N · E
+            </span>
+            <span className="font-mono text-[10px] md:text-[11px] tracking-[0.3em] text-[var(--loader-accent)]/80">
+              / 001
+            </span>
+          </motion.div>
+
           {/* Logo block — center-right */}
           <div className="absolute right-[6%] md:right-[10%] top-1/2 -translate-y-1/2 flex flex-col items-start">
             <motion.div
@@ -116,10 +132,54 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                   PK
                 </span>
               </div>
+              <div className="mt-3 font-mono text-[10px] md:text-[11px] tracking-[0.4em] text-[var(--loader-text)]/50 uppercase">
+                Portfolio · 2026
+              </div>
             </motion.div>
           </div>
 
-          {/* Bottom-left: percentage */}
+          {/* Horizontal scan line + HUD widget */}
+          <motion.div
+            className="absolute left-0 right-0 bottom-[22%] flex items-center pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: phase === "transition" ? 0 : 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <div className="flex-1 h-px bg-[var(--loader-text)]/10" />
+            <div className="relative flex items-center mx-4">
+              {/* HUD widget */}
+              <div className="flex flex-col items-start gap-2 px-4 py-2 border border-[var(--loader-accent)]/30">
+                <div className="flex items-center gap-2">
+                  <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[7px] border-l-transparent border-r-transparent border-t-[var(--loader-accent)]" />
+                  <span className="font-mono text-[9px] md:text-[10px] tracking-[0.3em] text-[var(--loader-text)]/70 uppercase">
+                    Mission-Dependent Payload
+                  </span>
+                  <span className="font-mono text-[10px] text-[var(--loader-accent)]">+</span>
+                </div>
+                <div className="font-mono text-[9px] md:text-[10px] tracking-[0.25em] text-[var(--loader-text)]/50 uppercase">
+                  System Interfaces · 03
+                </div>
+                {/* dot grid */}
+                <div className="grid grid-cols-12 gap-[3px] mt-1">
+                  {Array.from({ length: 36 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="w-[2px] h-[2px] rounded-full"
+                      style={{
+                        backgroundColor:
+                          i % 5 === 0
+                            ? "var(--loader-accent)"
+                            : "color-mix(in oklab, var(--loader-text) 30%, transparent)",
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="flex-1 h-px bg-[var(--loader-text)]/10" />
+          </motion.div>
+
+          {/* Bottom-left: percentage + Updating */}
           {phase === "loading" && (
             <motion.div
               className="absolute bottom-8 left-5 md:bottom-10 md:left-7 flex flex-col items-start"
@@ -137,9 +197,29 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                   %
                 </span>
               </div>
+              {/* dotted segments */}
+              <div className="mt-3 flex items-center gap-[3px]">
+                {Array.from({ length: 24 }).map((_, i) => {
+                  const filled = i < Math.round((progress / 100) * 24);
+                  return (
+                    <div
+                      key={i}
+                      className="h-[6px] w-[8px]"
+                      style={{
+                        backgroundColor: filled
+                          ? "var(--loader-accent)"
+                          : "color-mix(in oklab, var(--loader-text) 12%, transparent)",
+                      }}
+                    />
+                  );
+                })}
+              </div>
+              <div className="mt-3 font-mono text-[10px] md:text-[11px] tracking-[0.4em] text-[var(--loader-text)]/60 uppercase">
+                Updating
+                <span className="inline-block ml-1 text-[var(--loader-accent)]">...</span>
+              </div>
             </motion.div>
           )}
-
 
           {/* Transition sweep — single yellow curtain */}
           {phase === "transition" && (
