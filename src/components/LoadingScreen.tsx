@@ -119,7 +119,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
             </motion.div>
           </div>
 
-          {/* Bottom-left: tiny yellow tick + huge percentage + "Updating..." */}
+          {/* Bottom-left: percentage */}
           {phase === "loading" && (
             <motion.div
               className="absolute bottom-8 left-5 md:bottom-10 md:left-7 flex flex-col items-start"
@@ -136,12 +136,6 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
                 <span className="font-display text-2xl md:text-4xl font-light leading-none text-[var(--loader-accent)] ml-0.5">
                   %
                 </span>
-              </div>
-              {/* dotted segments */}
-              <div className="mt-2 flex gap-[3px]">
-                {Array.from({ length: 2 }).map((_, i) => (
-                  <span key={i} className="block h-[5px] w-[5px] bg-[var(--loader-text)]/30" />
-                ))}
               </div>
             </motion.div>
           )}
